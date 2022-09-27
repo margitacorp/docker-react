@@ -4,4 +4,4 @@ services:
 before_install:
   - docker build -t testimg -f Dockerfile.dev .
 script:
-  - docker run testimg npm run test -- --coverage
+  - docker run -e CI=true testimg npm run test -- --coverage
