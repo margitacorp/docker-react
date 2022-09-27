@@ -5,3 +5,14 @@ before_install:
   - docker build -t testimg -f Dockerfile.dev .
 script:
   - docker run -e CI=true testimg npm run test -- --coverage
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: docker-eb
+  env: Dockereb-env
+  bucket_name: elasticbeanstalk-us-east-1-438318153653
+  bucket_path: docker-app
+  on:
+    branch: master
+    access_key_id: $AWS_UID
+    secret_access_key: $AWS_PWD
